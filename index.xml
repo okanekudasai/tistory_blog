@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<skin>
+  <information>
+    <name>okane</name>
+    <version>1.0</version>
+    <description>
+      <![CDATA[오케인의 기술 블로그 입니다.]]>
+    </description>
+    <license>
+      <![CDATA[Copyrightⓒ2008 by okane]]>
+    </license>
+  </information>
+  <author>
+    <name>okane</name>
+    <homepage>http://okane-on-cliff.tistory.com/</homepage>
+    <email>okanekudasai6@gmail.com</email>
+  </author>
+  <!-- 스킨 기본 설정 -->
+  <default>
+     <!-- 사이드바 최근글 표시 갯수 -->
+    <recentEntries>5</recentEntries>
+    
+     <!-- 사이드바 최근 댓글 표시 갯수 -->
+    <recentComments>5</recentComments>
+    
+     <!-- 사이드바 최근 트랙백 표시 갯수 -->
+    <recentTrackbacks>5</recentTrackbacks>
+    
+     <!-- 한 페이지에 표시될 방명록 갯수 -->
+    <itemsOnGuestbook>10</itemsOnGuestbook>
+    
+     <!-- 사이드바 태그 갯수 -->
+    <tagsInCloud>30</tagsInCloud>
+    
+     <!-- 태그 표현 방식 1: 인기도, 2: 이름, 3: 랜덤 -->
+    <sortInCloud>3</sortInCloud>
+    
+     <!-- 댓글 영역 0: 감추기, 1: 펼치기 -->
+    <expandComment>0</expandComment>
+    
+     <!-- 트랙백 영역 0: 감추기, 1: 펼치기 -->
+    <expandTrackback>0</expandTrackback>
+    
+     <!-- 최근 공지 글자 수 -->
+    <lengthOfRecentNotice>25</lengthOfRecentNotice>
+    
+     <!-- 최근 글 글자 수 -->
+    <lengthOfRecentEntry>27</lengthOfRecentEntry>
+    
+     <!-- 최근 댓글 글자 수 -->
+    <lengthOfRecentComment>30</lengthOfRecentComment>
+    
+     <!-- 최근 트랙백 글자 수 -->
+    <lengthOfRecentTrackback>30</lengthOfRecentTrackback>
+    
+     <!-- 링크 글자 수 -->
+    <lengthOfLink>30</lengthOfLink>
+    
+     <!-- 카테고리 클릭 리스트 0: 숨김, 1: 보임 -->
+    <showListOnCategory>1</showListOnCategory>
+    
+     <!-- 글보관함 클릭 리스트 0: 숨김, 1: 보임 -->
+    <showListOnArchive>1</showListOnArchive>
+    
+     <!-- 댓글 표현 방법 -->
+    <commentMessage>
+      <none>댓글이 없습니다.</none>
+      <single>댓글 &lt;span class="cnt"&gt;하나&lt;/span&gt; 달렸습니다.</single>
+    </commentMessage>
+    
+     <!-- 트랙백 표현 방법 -->
+    <trackbackMessage>
+      <none>받은 트랙백이 없고</none>
+      <single>트랙백이 &lt;span class="cnt"&gt;하나&lt;/span&gt;이고</single>
+    </trackbackMessage>
+    
+     <!-- 카테고리 -->
+    <tree>
+    
+       <!-- 글자색 -->
+      <color>000000</color>
+      
+       <!-- 배경색 -->
+      <bgColor>ffffff</bgColor>
+      
+       <!-- 선택시 글자색 -->
+      <activeColor>000000</activeColor>
+       
+       <!-- 선택시 배경색 -->
+      <activeBgColor>eeeeee</activeBgColor>
+      
+       <!-- 카테고리 글자 수-->
+      <labelLength>27</labelLength>
+      
+       <!-- 카테고리 글 수 0: 숨김, 1: 보임 -->
+      <showValue>1</showValue>
+    </tree>
+    
+     <!-- 컨텐츠 영역 가로 사이즈-->
+    <contentWidth>500</contentWidth>
+  </default>
+  
+   <!-- 커버 사용을 위한 영역 -->
+  <cover>
+    <item>    
+      <!-- 커버 이름 (중복 불가) -->
+     <name>list</name>
+     
+      <!-- 표시될 이름 -->
+     <label><![CDATA[리스트형]]></label>
+      
+      <!-- 설명 -->
+     <description><![CDATA[리스트형식]]></description>
+    </item>
+  </cover>
+</skin>
