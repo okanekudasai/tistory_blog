@@ -8,51 +8,88 @@
     <link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]">
     <script src="https://kit.fontawesome.com/ec4be74063.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
+    integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE="
+    crossorigin="anonymous"></script>
+    <script>
+	$(function() {
+		$(".category_list").children("li").has("ul").addClass("ac-category"),
+			$(".ac-category .link_item").append("<i class=\"fas fa-angle-down\"></i>").addClass("ac-toggle"),
+			$(".ac-category").each(function() {
+			var c = $(this).children(".link_item"), d = c.attr("href");
+			c.removeAttr("href"),
+				$(this).children("ul").prepend(),
+				c.children("span").appendTo(c.parent(".ac-category").find(".view-all"))
+		});
+
+		$(".ac-toggle").click(function() {
+			var c = $(this).parent(".ac-category");
+			c.children("ul").toggle(250), c.toggleClass("expanded")
+		})
+	});
+	</script>
 </head>
 
 <body id="[##_body_id_##]">
     <s_t3>
         <div id="container" style="display: flex">
             <aside id="nav_bar" style="height: 100vh; z-index: 100;">
-                <div style="width: calc(var(--nav-width) / 10 * 8); border: dashed; margin: calc(var(--hamburger-button-size) + 4 * var(--logo-margin-top)) auto 0;">
+                <div style="position: absolute; bottom: 0; right: 0; background-color: red;">
+                    designed by okane
+                </div>
+                <div style="width: calc(var(--nav-width) / 10 * 8); border: dashed; margin: calc(var(--hamburger-button-size) + 4 * var(--logo-margin-top)) auto 0; padding-bottom: 50px;">
                     
-                    <s_sidebar_element><!--프로필-->
-                        <div style="background: white; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border-radius: 10%">
-                            여기 프로필이미지가 들어가요요
-                        </div>
-                        <div style="margin-top: 20px;">
-                            <div style="width: 90%; text-align: center; border: dashed; margin: 0 auto;">
-                                상태메세지 넣을거야 길게 써봐야지오예오ㅖ 재미없는 개밈이야야
-                                <i class="fa-solid fa-square-pen"></i>
+                    <s_sidebar>
+                        <s_sidebar_element><!-- 방문자 수-->
+                        전체:[##_count_total_##]
+                        오늘:[##_count_today_##]
+                        어제:[##_count_yesterday_##]
+                        </s_sidebar_element>
+                        <s_sidebar_element><!--프로필-->
+                            <div style="background-image: url([##_image_##]); background-size: contain; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border-radius: 10%">
                             </div>
-                            <div>
-                                소셜 아이콘
+                            
+                            <div id="admin_container">
+                                <a href="https://okane-on-cliff.tistory.com/manage/post"><i class="fa-solid fa-square-pen"></i>글쓰기</a>
                             </div>
-                        </div>
-                    </s_sidebar_element>
-                    
-                    <s_sidebar_element><!--검색-->
-                        <s_search>
-                            <div><input id="search" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }"><button>검색</button></div>
-                        </s_search>
-                    </s_sidebar_element>
-                    
-                    <s_sidebar_element><!--카테고리-->
-                        <div id="category_container">
-                            [##_category_list_##]
                             <script>
-                                console.log("rrrrr")
-                                var category_title = document.querySelector(".link_tit");
-                                var new_image = category_title.getElementByTagName('img');
-                                console.log("rrrrr")
-                                console.log(new_image);
-                                category_title.innerText.replace("분류 전체보기", "카테고리");
+                                if (window.T.config.ROLE == 'owner') admin_container.style.display = 'block';
                             </script>
-                        </div>
-                    </s_sidebar_element>
+
+                            <div style="margin-top: 20px;">
+                                <div style="width: 90%; text-align: center; border: dashed; margin: 0 auto;">
+                                    상태메세지 넣을거야 공지사항을 상태메세지로 쓸게요요 길게 써봐야지오예오ㅖ 재미없는 개밈이야야
+                                </div>
+                                <div>
+                                    소셜 아이콘 + 메일보내기
+                                    <img src="./images/github_icon.svg" style="width: 40px;">
+                                </div>
+                            </div>
+                        </s_sidebar_element>
+                        <s_sidebar_element><!--검색-->
+                            <s_search>
+                                <div><input id="search" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }"><button>검색</button></div>
+                            </s_search>
+                        </s_sidebar_element>
+                        
+                        <s_sidebar_element><!--카테고리-->
+                            <div id="category_container">
+                                [##_category_list_##]
+                                <script>
+                                    var category_title = document.querySelector(".link_tit");
+                                    category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "카테고리");
+                                </script>
+                            </div>
+                        </s_sidebar_element>
+
+                        
+                        
+                    </s_sidebar>
                 </div>
             </aside>
             <main id="main" style="background: red;">
+
                 <s_cover_group>
                     <s_cover_rep>
                         <s_cover name="front_door">

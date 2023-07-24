@@ -1,5 +1,5 @@
 :root {
-    --nav-width: 280px;
+    --nav-width: 300px;
     --hamburger-button-size: 40px;
     --logo-margin-top: 10px;
 }
@@ -20,6 +20,10 @@
     left: 20px;
 }
 
+#admin_container {
+    display:none
+}
+
 #category_container ul {
     list-style:none;
 }
@@ -32,6 +36,26 @@
     display: block;
     background-color: red;
     color: white;
+}
+
+/* 카테고리 접는 것에 관한 스타일일 */
+/* 접힌채로 시작 */
+.sub_category_list {
+	display: none;
+}
+/* 화살표 회전 */
+.ac-category.expanded .ac-toggle i {
+	transform: rotate(0.5turn);
+}
+/* 화살표 회전 시간 */
+.ac-toggle i {
+	transition: .1s
+}
+/* 화살표가 우측에 있다는 내용 */
+.ac-category .ac-toggle i {
+  float: right;
+  padding: 4px;
+  /* pointer-events: none; */
 }
 
 #hamburger_button {
@@ -63,6 +87,7 @@
 }
 @media (max-width: 1000px) {
     #nav_bar {
+        display: none;
         position: absolute;
     }
 }
