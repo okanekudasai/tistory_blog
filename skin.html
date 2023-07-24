@@ -6,53 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[##_page_title_##] — [##_title_##]</title>
     <link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]">
-    <link rel="stylesheet" :href='"//fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"'>
-    <link rel="stylesheet" :href='"//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"'>
+    <script src="https://kit.fontawesome.com/ec4be74063.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body id="[##_body_id_##]">
     <s_t3>
-        <main id="main" style="background: red;">
-            <s_cover_group>
-                <s_cover_rep>
-                    <s_cover name="list">
-                        <s_cover_item>
-                            <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                            <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                        </s_cover_item>
-                    </s_cover>
-                    <s_cover name="grid">
-                        <s_cover_item>
-                            <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                            <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                        </s_cover_item>
-                    </s_cover>
-                    <s_cover name="zigzag">
-                        <s_cover_item>
-                            <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                            <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                        </s_cover_item>
-                    </s_cover>
-                    <s_cover name="slideshow">
-                        <s_cover_item>
-                            <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                            <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                        </s_cover_item>
-                    </s_cover>
-                    <s_cover name="rrrr">
-                        <s_cover_item>
-                            <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                            <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                        </s_cover_item>
-                    </s_cover>
-                </s_cover_rep>
-            </s_cover_group>
-        </main>
-        <aside id="sidebar">
-            sfaee
-        </aside>
+        <div id="container" style="display: flex">
+            <aside id="nav_bar" style="height: 100vh; z-index: 100;">
+                <div style="width: calc(var(--nav-width) / 10 * 8); border: dashed; margin: calc(var(--hamburger-button-size) + 4 * var(--logo-margin-top)) auto 0;">
+                    
+                    <s_sidebar_element><!--프로필-->
+                        <div style="background: white; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border-radius: 10%">
+                            여기 프로필이미지가 들어가요요
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <div style="width: 90%; text-align: center; border: dashed; margin: 0 auto;">
+                                상태메세지 넣을거야 길게 써봐야지오예오ㅖ 재미없는 개밈이야야
+                                <i class="fa-solid fa-square-pen"></i>
+                            </div>
+                            <div>
+                                소셜 아이콘
+                            </div>
+                        </div>
+                    </s_sidebar_element>
+                    
+                    <s_sidebar_element><!--검색-->
+                        <s_search>
+                            <div><input id="search" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }"><button>검색</button></div>
+                        </s_search>
+                    </s_sidebar_element>
+                    
+                    <s_sidebar_element><!--카테고리-->
+                        <div id="category_container">
+                            [##_category_list_##]
+                            <script>
+                                console.log("rrrrr")
+                                var category_title = document.querySelector(".link_tit");
+                                var new_image = category_title.getElementByTagName('img');
+                                console.log("rrrrr")
+                                console.log(new_image);
+                                category_title.innerText.replace("분류 전체보기", "카테고리");
+                            </script>
+                        </div>
+                    </s_sidebar_element>
+                </div>
+            </aside>
+            <main id="main" style="background: red;">
+                <s_cover_group>
+                    <s_cover_rep>
+                        <s_cover name="front_door">
+                            <s_cover_item>
+                                <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
+                                <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
+                            </s_cover_item>
+                        </s_cover>
+                    </s_cover_rep>
+                </s_cover_group>
+            </main>
+        </div>
+        <div id="logo_container" style="display: flex">
+            <div id="hamburger_button">
+                <div id="hamburger_button_line_container">
+                    <div class="hamburger_button_line"></div>
+                    <div class="hamburger_button_line"></div>
+                    <div class="hamburger_button_line"></div>
+                </div>
+            </div>
+            <div id="logo" style="border: dashed;">
+                블로그 로고
+            </div>
+        </div>
     </s_t3>
 </body>
+
 
 </html>

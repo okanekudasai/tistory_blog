@@ -18,43 +18,15 @@
   
   <liststyle>
     <item>
-      <value>list</value>
-      <label>리스트</label>
-    </item>
-    <item>
-      <value>grid</value>
-      <label>그리드</label>
-    </item>
-    <item>
-      <value>zigzag</value>
-      <label>지그재그</label>
+      <value>front_door</value>
+      <label>대문</label>
     </item>
   </liststyle>
   <cover>
     <item>
-      <name>list</name>
-      <label>리스트</label>
-      <description>리스트 형태로 글을 보여줍니다.</description>
-    </item>
-    <item>
-      <name>grid</name>
-      <label>그리드</label>
-      <description>그리드 형태로 글을 보여줍니다.</description>
-    </item>
-    <item>
-      <name>zigzag</name>
-      <label>지그재그</label>
-      <description>지그재그 형태로 글을 보여줍니다.</description>
-    </item>
-    <item>
-      <name>slideshow</name>
-      <label>슬라이드쇼</label>
-      <description>슬라이드쇼 형태로 글을 보여줍니다.</description>
-    </item>
-    <item>
-      <name>rrrr</name>
-      <label>RRRRR</label>
-      <description>RRR쇼 형태로 글을 보여줍니다.</description>
+      <name>front_door</name>
+      <label>대문</label>
+      <description>하나의 글을 선택해서 대문으로 만들어요.</description>
     </item>
   </cover>
   <!-- 스킨 기본 설정 -->
