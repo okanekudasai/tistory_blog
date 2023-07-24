@@ -35,9 +35,6 @@
     <s_t3>
         <div id="container" style="display: flex">
             <aside id="nav_bar" style="height: 100vh; z-index: 100;">
-                <div style="position: absolute; bottom: 0; right: 0; background-color: red;">
-                    designed by okane
-                </div>
                 <div style="width: calc(var(--nav-width) / 10 * 8); border: dashed; margin: calc(var(--hamburger-button-size) + 4 * var(--logo-margin-top)) auto 0; padding-bottom: 50px;">
                     
                     <s_sidebar>
@@ -47,7 +44,7 @@
                         어제:[##_count_yesterday_##]
                         </s_sidebar_element>
                         <s_sidebar_element><!--프로필-->
-                            <div style="background-image: url([##_image_##]); background-size: contain; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border-radius: 10%">
+                            <div style="background-image: url([##_image_##]); background-size: contain; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto;">
                             </div>
                             
                             <div id="admin_container">
@@ -89,7 +86,10 @@
                 </div>
             </aside>
             <main id="main" style="background: red;">
-
+                <header_bar style="background-color: purple; display: block; height: calc(var(--hamburger-button-size) + 2 * var(--logo-margin-top)); width: 100%;">
+                    [##_page_title_##]
+                    <img src="./images/search_icon.svg" style="height: var(--hamburger-button-size)">
+                </header_bar>
                 <s_cover_group>
                     <s_cover_rep>
                         <s_cover name="front_door">
@@ -100,6 +100,72 @@
                         </s_cover>
                     </s_cover_rep>
                 </s_cover_group>
+
+                <s_article_rep>
+                    <s_permalink_article_rep>
+                        <header>
+                            <div>카테고리:[##_article_rep_category_##]</div>
+                            <div>글제목:[##_article_rep_title_##]</div>
+                            <div>날짜:[##_article_rep_date_##]</div>
+                            <s_ad_div>
+                                <a href="[##_s_ad_m_link_##]">수정</a>
+                                <a href="#" onclick="[##_s_ad_d_onclick_##]">삭제</a>
+                                <a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a>
+                            </s_ad_div>
+                        </header>
+                        <article>
+                            <div>내용:[##_article_rep_desc_##]</div>
+                        </article>
+                        <footer>
+                            <s_article_related>
+                                <s_article_related_rep>
+                                    [##_article_related_rep_title_##]
+                                </s_article_related_rep>
+                            </s_article_related>
+                            <s_tag_label>
+                                [##_tag_label_rep_##]
+                            </s_tag_label>
+                            <!--레이지로드 검색-->
+                            <div style="background-image: url([##_image_##]); background-size: contain; background-repeat: no-repeat; background-position: center; width:50px; height: 50px; border-radius: 25px;"></div>
+                            <div>작성자:[##_blogger_##]</div>
+                            <div>작성자설명:[##_desc_##]</div>
+                        </footer>
+                        <s_rp>
+                            <div class="commentWrite">
+                                <s_rp_member>
+                                    <s_rp_guest>
+                                        <p>
+                                            <input type="text" name="[##_rp_input_name_##]" value="[##_guest_name_##]" />
+                                            <label for="name"> : 이름 </label>
+                                        </p>
+                                        <p>
+                                            <input type="password" maxlength="8" name="[##_rp_input_password_##]" />
+                                            <label for="password"> : 패스워드 </label>
+                                        </p>
+                                    </s_rp_guest>
+                                    <p class="secretWrap">
+                                        <input type="checkbox" name="[##_rp_input_is_secret_##]" class="checkbox" />
+                                        <label for="secret"> 비밀글 </label>
+                                    </p>
+                                </s_rp_member>
+                                <p>
+                                    <textarea name="[##_rp_input_comment_##]" rows="10" cols="50"></textarea>
+                                </p>
+                                <p>
+                                    <input type="submit" value="댓글 달기" onclick="[##_rp_onclick_submit_##]" />
+                                </p>
+                            </div>
+                        </s_rp>
+                    </s_permalink_article_rep>
+
+                    <s_index_article_rep>
+                        <div>제목:[##_notice_rep_title_##]</div>
+                        <div>내용:[##_notice_rep_summary_##]</div>
+                        <br>
+                    </s_index_article_rep>
+                </s_article_rep>
+
+
             </main>
         </div>
         <div id="logo_container" style="display: flex">

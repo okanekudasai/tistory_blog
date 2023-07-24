@@ -17,7 +17,7 @@
 #logo_container {
     position: fixed;
     top: var(--logo-margin-top);
-    left: 20px;
+    left: var(--logo-margin-top);
 }
 
 #admin_container {
@@ -89,5 +89,11 @@
     #nav_bar {
         display: none;
         position: absolute;
+    }
+    #logo {
+        display: none;
+    }
+    #main {
+        width: 100vw;
     }
 }
