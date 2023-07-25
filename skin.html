@@ -44,7 +44,7 @@
                         어제:[##_count_yesterday_##]
                         </s_sidebar_element>
                         <s_sidebar_element><!--프로필-->
-                            <div style="background-image: url([##_image_##]); background-size: contain; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto;">
+                            <div style="background-image: url([##_image_##]); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border-radius: 20px">
                             </div>
                             
                             <div id="admin_container">
@@ -114,58 +114,186 @@
                             </s_ad_div>
                         </header>
                         <article>
-                            <div>내용:[##_article_rep_desc_##]</div>
+                            <div id="article_content">내용:[##_article_rep_desc_##]</div>
+                            <s_tag_label>
+                                <div class="tagTrail">
+                                    <span class="tagText">TAG </span> [##_tag_label_rep_##]
+                                </div>
+                            </s_tag_label>
                         </article>
                         <footer>
                             <s_article_related>
                                 <s_article_related_rep>
-                                    [##_article_related_rep_title_##]
+                                    <div>관련:[##_article_related_rep_title_##]</div> 
                                 </s_article_related_rep>
                             </s_article_related>
-                            <s_tag_label>
-                                [##_tag_label_rep_##]
-                            </s_tag_label>
                             <!--레이지로드 검색-->
-                            <div style="background-image: url([##_image_##]); background-size: contain; background-repeat: no-repeat; background-position: center; width:50px; height: 50px; border-radius: 25px;"></div>
+                            <div style="background-image: url([##_image_##]); background-size: cover; background-repeat: no-repeat; background-position: center; width:50px; height: 50px; border-radius: 25px;"></div>
                             <div>작성자:[##_blogger_##]</div>
                             <div>작성자설명:[##_desc_##]</div>
                         </footer>
                         <s_rp>
                             <div class="commentWrite">
-                                <s_rp_member>
-                                    <s_rp_guest>
-                                        <p>
-                                            <input type="text" name="[##_rp_input_name_##]" value="[##_guest_name_##]" />
-                                            <label for="name"> : 이름 </label>
+                                <s_rp_input_form>
+                                    <s_rp_member>
+                                        <s_rp_guest>
+                                            <p>
+                                                <input type="text" name="[##_rp_input_name_##]" value="[##_guest_name_##]" />
+                                                <label for="name"> : 이름 </label>
+                                            </p>
+                                            <p>
+                                                <input type="password" maxlength="8" name="[##_rp_input_password_##]" />
+                                                <label for="password"> : 패스워드 </label>
+                                            </p>
+                                        </s_rp_guest>
+                                        <p class="secretWrap">
+                                            <input type="checkbox" name="[##_rp_input_is_secret_##]" class="checkbox" />
+                                            <label for="secret"> 비밀글 </label>
                                         </p>
-                                        <p>
-                                            <input type="password" maxlength="8" name="[##_rp_input_password_##]" />
-                                            <label for="password"> : 패스워드 </label>
-                                        </p>
-                                    </s_rp_guest>
-                                    <p class="secretWrap">
-                                        <input type="checkbox" name="[##_rp_input_is_secret_##]" class="checkbox" />
-                                        <label for="secret"> 비밀글 </label>
+                                    </s_rp_member>
+                                    <p>
+                                        <textarea name="[##_rp_input_comment_##]" rows="10" cols="50"></textarea>
                                     </p>
-                                </s_rp_member>
-                                <p>
-                                    <textarea name="[##_rp_input_comment_##]" rows="10" cols="50"></textarea>
-                                </p>
-                                <p>
-                                    <input type="submit" value="댓글 달기" onclick="[##_rp_onclick_submit_##]" />
-                                </p>
+                                    <p>
+                                        <input type="submit" value="댓글 달기" onclick="[##_rp_onclick_submit_##]" />
+                                    </p>
+                                </s_rp_input_form>
+                            </div>
+                            <div class="commentList">
+                                <s_rp_container>
+                                    <ol>
+                                        <s_rp_rep>
+                                            <li id='[##_rp_rep_id_##]'>
+                                                <div class="[##_rp_rep_class_##]">
+                                                    <span class="image"><img src=[##_rp_rep_logo_##] /></span>
+                                                    <span class="name">[##_rp_rep_name_##]</span>
+                                                    <span class="date"> [##_rp_rep_date_##]</span>
+                                                    <span class="control">
+                                                    <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="modify">&nbsp;
+                                                        <span>수정/삭제</span>
+                                                    </a>
+                                                    <a href="#" onclick="[##_rp_rep_onclick_reply_##]" class="write">&nbsp;
+                                                        <span>댓글쓰기</span>
+                                                    </a>
+                                                    </span>
+                                                    <p>[##_rp_rep_desc_##]</p>
+                                                </div>
+                                                <s_rp2_container>
+                                                    <ul>
+                                                        <s_rp2_rep>
+                                                            <li id='[##_rp_rep_id_##]'>
+                                                                <div class="[##_rp_rep_class_##]">
+                                                                    <span class="image">[##_rp_rep_logo_##]</span>
+                                                                    <span class="name">[##_rp_rep_name_##]</span>
+                                                                    <span class="date"> [##_rp_rep_date_##]</span>
+                                                                    <span class="control">
+                                                                    <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="modify">&nbsp;
+                                                                        <span>수정/삭제</span>
+                                                                    </a>
+                                                                    </span>
+                                                                    <p>[##_rp_rep_desc_##]</p>
+                                                                </div>
+                                                            </li>
+                                                        </s_rp2_rep>
+                                                    </ul>
+                                                </s_rp2_container>
+                                            </li>
+                                        </s_rp_rep>
+                                    </ol>
+                                </s_rp_container>
                             </div>
                         </s_rp>
                     </s_permalink_article_rep>
 
+                    <s_article_protected>
+                        <div class="entryProtected">
+                            <h2><a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a></h2>
+                            <span class="date">[##_article_rep_date_##]</span>
+                            <p>보호되어 있는 글입니다. 내용을 보시려면 비밀번호를 입력하세요.</p>
+                            <p>
+                            <label for="[##_article_password_##]">비밀번호 ::</label>
+                            <input type="password" maxlength="16" id="[##_article_password_##]" name="[##_article_password_##]" value="" onkeydown="if (event.keyCode == 13)[##_article_dissolve_##]" />
+                            <input type="button" class="submit" value="submit" onclick="[##_article_dissolve_##]" />
+                            </p>
+                        </div>
+                    </s_article_protected>
+                </s_article_rep>
+
+                <!-- 공지사항 페이지 -->
+                <s_notice_rep>
                     <s_index_article_rep>
+                        [##_article_rep_link_##]
                         <div>제목:[##_notice_rep_title_##]</div>
                         <div>내용:[##_notice_rep_summary_##]</div>
                         <br>
                     </s_index_article_rep>
-                </s_article_rep>
+                    <s_permalink_article_rep>
+                        <header>
+                            <div>제목:[##_notice_rep_title_##]</div>
+                            <div>날짜:[##_notice_rep_date_##]</div>
+                        </header>
+                        <article>
+                            내용:[##_notice_rep_desc_##]
+                        </article>
+                    </s_permalink_article_rep>
+                </s_notice_rep>
 
+                <!-- 페이지 글 -->
+                <s_page_rep>
+                    <div>
+                        <h2><a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a></h2>
+                        <div>
+                        [##_article_rep_desc_##]
+                        </div>
+                    </div>
+                </s_page_rep>
 
+                <!-- 태그 클라우드 페이지 /tag -->
+                <s_tag>
+                    <div class="taglog">
+                        <h3>태그</h3>
+                        <ul>
+                            <s_tag_rep>
+                            <li>
+                                <a href="[##_tag_link_##]" class="[##_tag_class_##]">[##_tag_name_##]</a>
+                            </li>
+                            </s_tag_rep>
+                        </ul>
+                    </div>
+                </s_tag>
+
+                <!-- 검색 결과 페이지 /search -->
+                <s_list>
+                    <div class="searchList [##_list_style_##]">
+                        <div <s_list_image>style="background-image:url('[##_list_image_##]')"</s_list_image>>
+                        <h3>'[##_list_conform_##]'에 해당되는 글 [##_list_count_##]건</h3>
+                        <p>[##_list_description_##]!!!!@@@</p>
+                        </div>
+                        <ol>
+                        <s_list_rep>
+                            <li>
+                            <span class="date">[##_list_rep_regdate_##]</span>
+                            <a href="[##_list_rep_link_##]">[##_list_rep_title_##]</a>
+                            <span class="cnt">[##_list_rep_rp_cnt_##]</span>
+                            <s_list_rep_thumbnail>
+                                <img src="[##_list_rep_thumbnail_##]">
+                            </s_list_rep_thumbnail>
+                            </li>
+                        </s_list_rep>
+                        </ol>
+                    </div>
+                </s_list>
+                <s_paging>
+                    <div class="paging">
+                        <a [##_prev_page_##] class="[##_no_more_prev_##]">◀ PREV </a>
+                        <span class="numbox">
+                        <s_paging_rep>
+                            <a [##_paging_rep_link_##] class="num">[[##_paging_rep_link_num_##]]</a>
+                        </s_paging_rep>
+                        </span>
+                        <a [##_next_page_##] class="[##_no_more_next_##]">NEXT ▶</a>
+                    </div>
+                </s_paging>
             </main>
         </div>
         <div id="logo_container" style="display: flex">

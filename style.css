@@ -1,3 +1,7 @@
+#DragSchLayer {
+    display: none !important;
+}
+
 :root {
     --nav-width: 300px;
     --hamburger-button-size: 40px;
