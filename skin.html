@@ -13,6 +13,7 @@
     integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE="
     crossorigin="anonymous"></script>
     <script>
+    /*
 	$(function() {
 		$(".category_list").children("li").has("ul").addClass("ac-category");
         $(".ac-category .link_item").append("<i class=\"fas fa-angle-right\"></i>").addClass("ac-toggle");
@@ -28,6 +29,8 @@
 			c.children("ul").toggle(250), c.toggleClass("expanded")
 		})
 	});
+    */
+    
     var getScrollPosition = (e) => {
         if (e == 0) header_bar.style.top = 'calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)))';
         else {
@@ -287,6 +290,7 @@
                             어제:[##_count_yesterday_##]
                             </s_sidebar_element>
                             -->
+                            <!-- 프로필에서 블로그 메뉴 분리 후 여기다 놓고 프로필에는 설명이나 링크 같은거 달아두자자 -->
                             <s_sidebar_element><!--프로필-->
                                 <div id="profile_container">
                                     <div class="nav_content">
@@ -339,13 +343,35 @@
                             <s_sidebar_element><!--카테고리-->
                                 <div id="category_container">
                                     <div class="nav_content">
-                                        <div id="category_container">
-                                            [##_category_list_##]
-                                            <script>
-                                                var category_title = document.querySelector(".link_tit");
+                                        [##_category_list_##]
+                                        <script>
+                                            var category_title = document.querySelector(".link_tit");
                                                 category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "카테고리");
-                                            </script>
-                                        </div>
+
+                                            for (let el of document.querySelector('.category_list').children) {
+                                                if (el.innerText[0] == '*') {
+                                                    let ih = el.innerHTML;
+                                                    let index = ih.indexOf('*');
+                                                    index = ih.indexOf('*', index + 1);
+                                                    el.innerHTML = ih.substring(0, index) + ih.substring(index + 1);
+                                                    // console.log(el.innerHTML);
+                                                    const ulElement = document.createElement('ul');
+                                                    ulElement.classList.add('big_category_list');
+                                                    let article_count = 0;
+                                                    while (el.nextElementSibling && el.nextElementSibling.innerText[0] != '*') {
+                                                        article_count += Number(el.nextElementSibling.querySelector(".c_cnt").innerText.slice(1, -1));
+                                                        ulElement.appendChild(el.nextElementSibling);
+                                                    }
+                                                    el.appendChild(ulElement);
+                                                    el.querySelector(".c_cnt").innerText = "(" + article_count + ")";
+                                                }
+                                            }
+
+                                            const categoryCount = document.querySelectorAll('.tt_category .c_cnt');
+                                            for (let c of categoryCount) {
+                                                c.textContent = c.textContent.slice(1, -1);
+                                            }
+                                        </script>
                                     </div>
                                 </div>
                             </s_sidebar_element>
