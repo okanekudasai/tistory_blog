@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'MBC';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 #DragSchLayer {
     display: none !important;
 }
@@ -10,12 +18,16 @@
     --nav-width: 300px;
     --hamburger-button-size: 40px;
     --logo-margin-top: 10px;
-    --nav-inside-start: 3;
+    --nav-inside-start: 4;
     --main-logo-width: 120px;
 }
 
 html {
     width: 100%;
+}
+
+a {
+    text-decoration: none;
 }
 
 * {
@@ -29,7 +41,7 @@ html {
     top: 0;
     height: calc(var(--vh, 1vh) * 100);
     width: var(--nav-width);
-    background: white;
+    background: rgb(236, 236, 236);
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
     overflow: auto;
     transition: all 0.1s;
@@ -51,8 +63,41 @@ html {
 }
 
 #nav_bar_inside {
-    width: calc(var(--nav-width) / 10 * 8);
+    /* width: calc(var(--nav-width) / 10 * 8); */
+    width: var(--nav-width);
     margin: 0 auto;
+}
+
+#nav_bar_inside > * {
+    width: 100%;
+}
+
+.nav_content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.hr_div {
+    width: 100%;
+    height: 5px;
+    background: rgb(255, 255, 255);
+    
+    margin: 50px 0;
+}
+
+.blog_menu_button_container {
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.blog_menu_button_container > img {
+    width: 25px;
+    height: 25px;
+}
+
+.blog_menu_button_container > div {
+    font-size: 10px;
 }
 
 #logo_container {
@@ -77,11 +122,11 @@ html {
     padding-left: 0;
 }
 
-#category_container > ul > li > a {
+/* #category_container > ul > li > a {
     display: block;
     background-color: red;
     color: white;
-}
+} */
 
 /* 카테고리 접는 것에 관한 스타일일 */
 /* 접힌채로 시작 */
@@ -158,8 +203,9 @@ html {
     position: fixed;
     left: inherit;
     top: calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)));
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.8);
+    /* backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); */
     /* transform: translateY(calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)))); */
     height: calc(var(--hamburger-button-size) + 2 * var(--logo-margin-top));
     width: inherit;
@@ -196,5 +242,19 @@ textarea {
 }
 
 #logo {
-    background-color: blue;
+    border: dashed;
+    height: var(--hamburger-button-size);
+    width: var(--main-logo-width);
+    margin-left: var(--logo-margin-top);
+}
+
+#logo:hover {
+    cursor: pointer;
+}
+
+#logo div {
+    text-align: center;
+    font-family: 'MBC';
+    font-size: calc(var(--hamburger-button-size) * 0.8);
+    line-height: var(--hamburger-button-size);
 }

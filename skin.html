@@ -14,13 +14,13 @@
     crossorigin="anonymous"></script>
     <script>
 	$(function() {
-		$(".category_list").children("li").has("ul").addClass("ac-category"),
-			$(".ac-category .link_item").append("<i class=\"fas fa-angle-down\"></i>").addClass("ac-toggle"),
-			$(".ac-category").each(function() {
-			var c = $(this).children(".link_item"), d = c.attr("href");
-			c.removeAttr("href"),
-				$(this).children("ul").prepend(),
-				c.children("span").appendTo(c.parent(".ac-category").find(".view-all"))
+		$(".category_list").children("li").has("ul").addClass("ac-category");
+        $(".ac-category .link_item").append("<i class=\"fas fa-angle-right\"></i>").addClass("ac-toggle");
+        $(".ac-category").each(function() {
+        var c = $(this).children(".link_item"), d = c.attr("href");
+        c.removeAttr("href"),
+            $(this).children("ul").prepend(),
+            c.children("span").appendTo(c.parent(".ac-category").find(".view-all"))
 		});
 
 		$(".ac-toggle").click(function() {
@@ -89,6 +89,8 @@
                                 <div>작성자설명:[##_desc_##]</div>
                             </footer>
                             <s_rp>
+                                [##_comment_group_##]
+                                <!--
                                 <div class="commentWrite">
                                     <s_rp_input_form>
                                         <s_rp_member>
@@ -158,6 +160,7 @@
                                         </ol>
                                     </s_rp_container>
                                 </div>
+                                -->
                             </s_rp>
                         </s_permalink_article_rep>
 
@@ -277,45 +280,73 @@
                 <div id="nav_bar_inside_region">
                     <div id="nav_bar_inside">
                         <s_sidebar>
-                            <s_sidebar_element><!-- 방문자 수-->
+                            <!--
+                            <s_sidebar_element>--><!-- 방문자 수--><!--
                             전체:[##_count_total_##]
                             오늘:[##_count_today_##]
                             어제:[##_count_yesterday_##]
                             </s_sidebar_element>
+                            -->
                             <s_sidebar_element><!--프로필-->
-                                <div style="background-image: url([##_image_##]); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border-radius: 20px">
-                                </div>
-                                
-                                <div id="admin_container">
-                                    <a href="https://okane-on-cliff.tistory.com/manage/post"><i class="fa-solid fa-square-pen"></i>글쓰기</a>
-                                </div>
-                                <script>
-                                    if (window.T.config.ROLE == 'owner') admin_container.style.display = 'block';
-                                </script>
+                                <div id="profile_container">
+                                    <div class="nav_content">
+                                        <div style="background-image: url([##_image_##]); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border: white 10px solid; box-shadow: 0 10px 10px 0px rgba(0,0,0,0.2);"></div>
+                                        <!--<div id="admin_container">
+                                          <a href="https://okane-on-cliff.tistory.com/manage/post"><i class="fa-solid fa-square-pen"></i>글쓰기</a>
+                                        </div>
+                                        <script>
+                                            if (window.T.config.ROLE == 'owner') admin_container.style.display = 'block';
+                                        </script>-->
 
-                                <div style="margin-top: 20px;">
-                                    <div style="width: 90%; text-align: center; border: dashed; margin: 0 auto;">
-                                        상태메세지 넣<br>을<br>거<br>야<br> 공<br>지<br>사<br>항<br>을<br> 상<br>태<br>메<br>세태<br>메<br>세<br><br><br><br><br><br>넣<br>을<br>거<br>야<br> 공<br>지<br>사<br>항<br>을<br> 상<br>태<br>메<br>세태<br>메<br>세<br><br><br><br><br><br>넣<br>을<br>거<br>야<br> 공<br>지<br>사<br>항<br>을<br> 상<br>태<br>메<br>세태<br>메<br>세<br><br><br><br><br><br>넣<br>을<br>거<br>야<br> 공<br>지<br>사<br>항<br>을<br> 상<br>태<br>메<br>세태<br>메<br>세<br><br><br><br><br><br>지로 쓸게요요 길게 써봐야지오예오ㅖ 재미없는 개밈이야야
-                                    </div>
-                                    <div>
-                                        소셜 아이콘 + 메일보내기
-                                        <img src="./images/github_icon.svg" style="width: 40px;">
+                                        <div id="blog_menu" style="margin-top: 40px;">
+                                            <!--
+                                            <div>
+                                                안녕하세요요
+                                            </div>
+                                            -->
+                                            <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 50px; border-radius: 25px; background: white; margin: 0 auto; box-shadow: 0 5px 5px 0px rgba(0,0,0,0.2);">
+                                                <!--<img width="30" height="30" src="./images/github_icon.svg">-->
+                                                <div class="blog_menu_button_container">
+                                                    <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-home-multimedia-kiranshastry-gradient-kiranshastry.png" alt="external-home-multimedia-kiranshastry-gradient-kiranshastry"/>
+                                                    <div>공지</div>
+                                                </div>
+                                                <div class="blog_menu_button_container">
+                                                    <img src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-note-documents-icongeek26-outline-gradient-icongeek26.png" alt="external-note-documents-icongeek26-outline-gradient-icongeek26"/>
+                                                    <div>방명록</div>
+                                                </div>
+                                                <div class="blog_menu_button_container">
+                                                    <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-search-logistic-delivery-kiranshastry-gradient-kiranshastry.png" alt="external-search-logistic-delivery-kiranshastry-gradient-kiranshastry"/>
+                                                    <div>검색</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="hr_div"></div>
                             </s_sidebar_element>
-                            <s_sidebar_element><!--검색-->
-                                <s_search>
-                                    <div><input id="search" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }"><button>검색</button></div>
-                                </s_search>
-                            </s_sidebar_element>
+
+                            <!--
+                            <s_sidebar_element>--><!--검색--><!--
+                                <div id="search_container">
+                                    <div class="nav_content">
+                                        <s_search>
+                                            <div><input id="search" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }"><button>검색</button></div>
+                                        </s_search>
+                                    </div>
+                                </div>
+                            </s_sidebar_element>-->
                             
                             <s_sidebar_element><!--카테고리-->
                                 <div id="category_container">
-                                    [##_category_list_##]
-                                    <script>
-                                        var category_title = document.querySelector(".link_tit");
-                                        category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "카테고리");
-                                    </script>
+                                    <div class="nav_content">
+                                        <div id="category_container">
+                                            [##_category_list_##]
+                                            <script>
+                                                var category_title = document.querySelector(".link_tit");
+                                                category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "카테고리");
+                                            </script>
+                                        </div>
+                                    </div>
                                 </div>
                             </s_sidebar_element>
                         </s_sidebar>
@@ -331,8 +362,10 @@
                     <div class="hamburger_button_line"></div>
                 </div>
             </div>
-            <div id="logo" style="border: dashed; margin-left: var(--logo-margin-top); width: var(--main-logo-width); height: var(--hamburger-button-size)">
-                블로그 로고
+            <div id="logo" onClick="location.href ='https://okane-on-cliff.tistory.com/'">
+                <div id="logo_main">
+                    블로그
+                </div>
             </div>
         </div>
         <div id="search_icon_container">
