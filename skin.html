@@ -12,54 +12,29 @@
     src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
     integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE="
     crossorigin="anonymous"></script>
-    <script>
-    /*
-	$(function() {
-		$(".category_list").children("li").has("ul").addClass("ac-category");
-        $(".ac-category .link_item").append("<i class=\"fas fa-angle-right\"></i>").addClass("ac-toggle");
-        $(".ac-category").each(function() {
-        var c = $(this).children(".link_item"), d = c.attr("href");
-        c.removeAttr("href"),
-            $(this).children("ul").prepend(),
-            c.children("span").appendTo(c.parent(".ac-category").find(".view-all"))
-		});
-
-		$(".ac-toggle").click(function() {
-			var c = $(this).parent(".ac-category");
-			c.children("ul").toggle(250), c.toggleClass("expanded")
-		})
-	});
-    */
     
-    var getScrollPosition = (e) => {
-        if (e == 0) header_bar.style.top = 'calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)))';
-        else {
-            header_bar.style.top = 0;
-        }
-    }
-	</script>
 </head>
 
 <body id="[##_body_id_##]" onscroll="getScrollPosition(this.scrollY);">
     <s_t3>
         <div id="container">
             <main id="main">
-                <div id="main_inside">
-                    <s_cover_group>
-                        <s_cover_rep>
-                            <s_cover name="front_door">
-                                <s_cover_item>
-                                    <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                                    <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                                </s_cover_item>
-                            </s_cover>
-                        </s_cover_rep>
-                    </s_cover_group>
+                <s_cover_group>
+                    <s_cover_rep>
+                        <s_cover name="front_door">
+                            <s_cover_item>
+                                <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
+                                <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
+                            </s_cover_item>
+                        </s_cover>
+                    </s_cover_rep>
+                </s_cover_group>
 
+                <div class="main_inside_padding">
                     <s_article_rep>
                         <s_permalink_article_rep>
                             <header>
-                                <div id="header_container" style="margin: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top))) 0;">
+                                <div id="header_container" style="width: 100%; padding-top: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)));">
                                     <div id='article_category' class="text_center" name=[##_article_rep_category_##]>[##_article_rep_category_##]</div>
                                     <div class="text_center"><h1>[##_article_rep_title_##]</h1></div>
                                     <div class="text_center">[##_article_rep_date_##]</div>
@@ -72,8 +47,80 @@
                                     </s_ad_div>
                                 </div>
                             </header>
+
                             <article>
-                                <div id="article_content">[##_article_rep_desc_##]</div>
+                                <div id="article_content">
+                                    <div id='article_index_container'>
+                                        <div id='article_index_container_caption'>글 목차</div>
+                                    </div>
+                                    [##_article_rep_desc_##]
+                                </div>
+
+                                <script>
+                                    let article_all_tag = article_content.querySelectorAll('div.tt_article_useless_p_margin.contents_style *');
+                                    let h_mapper = {};
+                                    let h_stack_size = [1];
+                                    let h_stack_index = [-1];
+                                    for (let i in article_all_tag) {
+                                        if (article_all_tag[i].tagName != 'H4' && article_all_tag[i].tagName != 'H3' && article_all_tag[i].tagName != 'H2') continue;
+                                        article_all_tag[i].id = i;
+                                        let present_h_size = article_all_tag[i].tagName[1];
+                                        let temp_h_array = [];
+                                        while (present_h_size < h_stack_size[h_stack_size.size() - 1]) {
+                                            temp_h_array.push(h_stack_index.pop());
+                                            let temp_top = h_stack_size.pop();
+                                            if (temp_top > h_stack_size[h_stack_size.size() - 1]) {
+                                                h_mapper[h_stack_index[h_stack_index.size()-1]] = temp_h_array;
+                                                temp_h_array = new Array();
+                                            }
+                                        }
+                                        
+                                        h_stack_index.push(i);
+                                        h_stack_size.push(present_h_size);
+                                    }
+                                    let present_h_size = 1;
+                                        
+                                    let temp_h_array = [];
+                                    while (present_h_size < h_stack_size[h_stack_size.size() - 1]) {
+                                        temp_h_array.push(h_stack_index.pop());
+                                        let temp_top = h_stack_size.pop();
+                                        if (temp_top > h_stack_size[h_stack_size.size() - 1]) {
+                                            h_mapper[h_stack_index[h_stack_index.size()-1]] = temp_h_array;
+                                            temp_h_array = new Array();
+                                        }
+                                    }
+
+                                    for (let k of Object.keys(h_mapper)) {
+                                        h_mapper[k] = h_mapper[k].reverse();
+                                    }
+
+                                    let p_ul = document.createElement('div');
+                                    p_ul.id = 'article_index_container_inside';
+                                    article_index_container.appendChild(p_ul);
+
+                                    let dfsing = (node) => {
+                                        for (let i of h_mapper[node]) {
+                                            let new_ul = document.createElement('ul');
+                                            let new_li = document.createElement('li');
+                                            let new_a = document.createElement('a');
+                                            new_a.href = '#' + i;
+                                            new_a.textContent = article_all_tag[i].textContent;
+                                            new_li.appendChild(new_a);
+                                            new_ul.appendChild(new_li);
+                                            p_ul.appendChild(new_ul);
+                                            let temp = p_ul;
+                                            p_ul = new_ul;
+                                            if (h_mapper[i]) {
+                                                dfsing(i);
+                                            }
+                                            p_ul = temp;
+                                        }
+                                    }
+
+                                    dfsing(-1);
+
+                                </script>
+
                                 <s_tag_label>
                                     <div class="tagTrail">
                                         <span class="tagText">TAG </span> [##_tag_label_rep_##]
@@ -93,77 +140,6 @@
                             </footer>
                             <s_rp>
                                 [##_comment_group_##]
-                                <!--
-                                <div class="commentWrite">
-                                    <s_rp_input_form>
-                                        <s_rp_member>
-                                            <s_rp_guest>
-                                                <p>
-                                                    <input type="text" name="[##_rp_input_name_##]" value="[##_guest_name_##]" />
-                                                    <label for="name"> : 이름 </label>
-                                                </p>
-                                                <p>
-                                                    <input type="password" maxlength="8" name="[##_rp_input_password_##]" />
-                                                    <label for="password"> : 패스워드 </label>
-                                                </p>
-                                            </s_rp_guest>
-                                            <p class="secretWrap">
-                                                <input type="checkbox" name="[##_rp_input_is_secret_##]" class="checkbox" />
-                                                <label for="secret"> 비밀글 </label>
-                                            </p>
-                                        </s_rp_member>
-                                        <p>
-                                            <textarea name="[##_rp_input_comment_##]" rows="10" cols="50"></textarea>
-                                        </p>
-                                        <p>
-                                            <input type="submit" value="댓글 달기" onclick="[##_rp_onclick_submit_##]" />
-                                        </p>
-                                    </s_rp_input_form>
-                                </div>
-                                <div class="commentList">
-                                    <s_rp_container>
-                                        <ol>
-                                            <s_rp_rep>
-                                                <li id='[##_rp_rep_id_##]'>
-                                                    <div class="[##_rp_rep_class_##]">
-                                                        <span class="image"><img src=[##_rp_rep_logo_##] /></span>
-                                                        <span class="name">[##_rp_rep_name_##]</span>
-                                                        <span class="date"> [##_rp_rep_date_##]</span>
-                                                        <span class="control">
-                                                        <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="modify">&nbsp;
-                                                            <span>수정/삭제</span>
-                                                        </a>
-                                                        <a href="#" onclick="[##_rp_rep_onclick_reply_##]" class="write">&nbsp;
-                                                            <span>댓글쓰기</span>
-                                                        </a>
-                                                        </span>
-                                                        <p>[##_rp_rep_desc_##]</p>
-                                                    </div>
-                                                    <s_rp2_container>
-                                                        <ul>
-                                                            <s_rp2_rep>
-                                                                <li id='[##_rp_rep_id_##]'>
-                                                                    <div class="[##_rp_rep_class_##]">
-                                                                        <span class="image"><img src=[##_rp_rep_logo_##] /></span>
-                                                                        <span class="name">[##_rp_rep_name_##]</span>
-                                                                        <span class="date"> [##_rp_rep_date_##]</span>
-                                                                        <span class="control">
-                                                                        <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="modify">&nbsp;
-                                                                            <span>수정/삭제</span>
-                                                                        </a>
-                                                                        </span>
-                                                                        <p>[##_rp_rep_desc_##]</p>
-                                                                    </div>
-                                                                </li>
-                                                            </s_rp2_rep>
-                                                        </ul>
-                                                    </s_rp2_container>
-                                                </li>
-                                            </s_rp_rep>
-                                        </ol>
-                                    </s_rp_container>
-                                </div>
-                                -->
                             </s_rp>
                         </s_permalink_article_rep>
 
@@ -257,6 +233,7 @@
                         </div>
                     </s_paging>
                 </div>
+
                 <header_bar id="header_bar">
                     <div id="page_title_container" style="margin: 0 auto;">
                         <div id="page_title_category" style="font-size: x-small; text-align: center; while-space: nowrap;">
@@ -273,12 +250,19 @@
                     </div>
                 </header_bar>
                 <script>
+                    var getScrollPosition = (e) => {
+                        if (e == 0) header_bar.style.top = 'calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)))';
+                        else {
+                            header_bar.style.top = 0;
+                        }
+                    }
                     if (document.body.id == 'tt-body-page') {
                         page_title_category.style.display = 'block';
                         page_title_category.innerText = article_category.getAttribute('name');
                     }
                 </script>
             </main>
+            <div id="difense_div"></div>
             <aside class="nav_bar">
                 <div id="nav_bar_inside_region">
                     <div id="nav_bar_inside">
@@ -345,18 +329,18 @@
                                     <div class="nav_content">
                                         [##_category_list_##]
                                         <script>
-                                            var category_title = document.querySelector(".link_tit");
+                                            var category_title = document.querySelector("#category_container .link_tit");
                                                 category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "카테고리");
 
-                                            for (let el of document.querySelector('.category_list').children) {
+                                            for (let el of document.querySelector('#category_container .category_list').children) {
                                                 if (el.innerText[0] == '*') {
                                                     let ih = el.innerHTML;
                                                     let index = ih.indexOf('*');
-                                                    index = ih.indexOf('*', index + 1);
+                                                    index = ih.indexOf('*', index+1);
                                                     el.innerHTML = ih.substring(0, index) + ih.substring(index + 1);
                                                     // console.log(el.innerHTML);
                                                     const ulElement = document.createElement('ul');
-                                                    ulElement.classList.add('big_category_list');
+                                                    ulElement.classList.add('middle_category_list');
                                                     let article_count = 0;
                                                     while (el.nextElementSibling && el.nextElementSibling.innerText[0] != '*') {
                                                         article_count += Number(el.nextElementSibling.querySelector(".c_cnt").innerText.slice(1, -1));
@@ -367,9 +351,33 @@
                                                 }
                                             }
 
-                                            const categoryCount = document.querySelectorAll('.tt_category .c_cnt');
+                                            const categoryCount = document.querySelectorAll('#category_container .tt_category .c_cnt');
                                             for (let c of categoryCount) {
                                                 c.textContent = c.textContent.slice(1, -1);
+                                            }
+
+                                            for (let el of document.querySelectorAll('.tt_category > li > ul a')) {
+                                                if(el.parentElement.querySelector('ul')/* || el.querySelector('.c_cnt').textContent == '0'*/) {
+                                                    el.removeAttribute("href");
+
+                                                    let arrow_box = document.createElement('span');
+                                                    arrow_box.innerHTML = '<i class=\"fas fa-angle-right\"></i>'
+                                                    el.appendChild(arrow_box);
+
+                                                    let ul_box = document.createElement('div');
+                                                    ul_box.classList.add('ul_box');
+                                                    ul_box.classList.add('height_zero');
+                                                    ul_box.appendChild(el.nextElementSibling);
+                                                    el.parentElement.appendChild(ul_box);
+
+                                                    el.onclick = () => {
+                                                        if (ul_box.classList.contains('height_zero')) {
+                                                            ul_box.classList.remove('height_zero');
+                                                        } else {
+                                                            ul_box.classList.add('height_zero');
+                                                        }
+                                                    }
+                                                }
                                             }
                                         </script>
                                     </div>
@@ -442,6 +450,7 @@
                 if (past_window_width == window.innerWidth) {
                     return;
                 }
+                difense_div.style.display = 'none';
                 past_window_width = window.innerWidth
                 if (window.innerWidth <= width_standard) {
                     nav_bar.style.left = 'calc(var(--nav-width) * -1)';
@@ -474,11 +483,23 @@
             nav_bar.style.left = 'calc(var(--nav-width) * -1)';
             main.style.width = '100%';
             main.style.left = '0';
+            main.style.filter = 'none'
+            difense_div.style.display = 'none';
         } else {
             nav_bar.style.left = '0';
             if (window.innerWidth <= absolute_nav_standard) {
                 main.style.width = '100%';
                 main.style.left = '0';
+                difense_div.style.display = 'block';
+                difense_div.onclick = () => {
+                    hamburger_button_click();
+                }
+                /*
+                main.style.filter = 'blur(5px)'
+                main.onclick = () => {
+                    hamburger_button_click();
+                }
+                */
             } else {
                 main.style.width = 'calc(100% - var(--nav-width))';
                 main.style.left = 'var(--nav-width)';
@@ -497,6 +518,7 @@
         setTimeout(set_page_title_scroll, '100');
     }
 </script>
+
 
 
 </html>
