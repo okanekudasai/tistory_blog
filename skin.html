@@ -35,14 +35,18 @@
                         <s_permalink_article_rep>
                             <header>
                                 <div id="header_container" style="width: 100%; padding-top: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)));">
-                                    <div id='article_category' class="text_center" name=[##_article_rep_category_##]>[##_article_rep_category_##]</div>
+                                    <div style="text-align: center;">
+                                        <span id='article_category' name=[##_article_rep_category_##] style="padding: 5px 10px; border-radius: 10px; background: rgba(123, 201, 255, 0.8); color: white; font-size: 12px; font-weight: 900;">
+                                            [##_article_rep_category_##]
+                                        </span>
+                                    </div>
                                     <div class="text_center"><h1>[##_article_rep_title_##]</h1></div>
-                                    <div class="text_center">[##_article_rep_date_##]</div>
+                                    <div style="font-size: 14px; text-align: center;">[##_article_rep_date_##]</div>
                                     <s_ad_div>
-                                        <div style="text-align: center;">
-                                            <a href="[##_s_ad_m_link_##]">수정</a>|
-                                            <a href="#" onclick="[##_s_ad_d_onclick_##]">삭제</a>|
-                                            <a href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a>
+                                        <div style="text-align: center; margin-top: 25px;">
+                                            <a class="article_admin_button" href="[##_s_ad_m_link_##]">수정</a>
+                                            <a class="article_admin_button" href="#" onclick="[##_s_ad_d_onclick_##]">삭제</a>
+                                            <a class="article_admin_button" href="#" onclick="[##_s_ad_s2_onclick_##]">[##_s_ad_s1_label_##]</a>
                                         </div>
                                     </s_ad_div>
                                 </div>
@@ -50,19 +54,28 @@
 
                             <article>
                                 <div id="article_content">
-                                    <div id='article_index_container'>
+                                    <div id='article_index_container' style="margin-top: 80px;">
                                         <div id='article_index_container_caption'>글 목차</div>
                                     </div>
+
+                                    <div id='title_article_divide_box' style="margin: 60px auto;">
+                                        <hr style="height: 5px; width: 80%; margin-bottom: 10px;">
+                                        <hr style="height: 3px; width: 65%;">
+                                    </div>
+
                                     [##_article_rep_desc_##]
                                 </div>
 
                                 <script>
                                     let article_all_tag = article_content.querySelectorAll('div.tt_article_useless_p_margin.contents_style *');
+                                    
+                                    let h_flag = false;
                                     let h_mapper = {};
                                     let h_stack_size = [1];
                                     let h_stack_index = [-1];
                                     for (let i in article_all_tag) {
                                         if (article_all_tag[i].tagName != 'H4' && article_all_tag[i].tagName != 'H3' && article_all_tag[i].tagName != 'H2') continue;
+                                        h_flag = true;
                                         article_all_tag[i].id = i;
                                         let present_h_size = article_all_tag[i].tagName[1];
                                         let temp_h_array = [];
@@ -74,73 +87,108 @@
                                                 temp_h_array = new Array();
                                             }
                                         }
-                                        
                                         h_stack_index.push(i);
                                         h_stack_size.push(present_h_size);
                                     }
-                                    let present_h_size = 1;
-                                        
-                                    let temp_h_array = [];
-                                    while (present_h_size < h_stack_size[h_stack_size.size() - 1]) {
-                                        temp_h_array.push(h_stack_index.pop());
-                                        let temp_top = h_stack_size.pop();
-                                        if (temp_top > h_stack_size[h_stack_size.size() - 1]) {
-                                            h_mapper[h_stack_index[h_stack_index.size()-1]] = temp_h_array;
-                                            temp_h_array = new Array();
-                                        }
-                                    }
 
-                                    for (let k of Object.keys(h_mapper)) {
-                                        h_mapper[k] = h_mapper[k].reverse();
-                                    }
-
-                                    let p_ul = document.createElement('div');
-                                    p_ul.id = 'article_index_container_inside';
-                                    article_index_container.appendChild(p_ul);
-
-                                    let dfsing = (node) => {
-                                        for (let i of h_mapper[node]) {
-                                            let new_ul = document.createElement('ul');
-                                            let new_li = document.createElement('li');
-                                            let new_a = document.createElement('a');
-                                            new_a.href = '#' + i;
-                                            new_a.textContent = article_all_tag[i].textContent;
-                                            new_li.appendChild(new_a);
-                                            new_ul.appendChild(new_li);
-                                            p_ul.appendChild(new_ul);
-                                            let temp = p_ul;
-                                            p_ul = new_ul;
-                                            if (h_mapper[i]) {
-                                                dfsing(i);
+                                    if (h_flag) {
+                                        let present_h_size = 1;
+                                            
+                                        let temp_h_array = [];
+                                        while (present_h_size < h_stack_size[h_stack_size.size() - 1]) {
+                                            temp_h_array.push(h_stack_index.pop());
+                                            let temp_top = h_stack_size.pop();
+                                            if (temp_top > h_stack_size[h_stack_size.size() - 1]) {
+                                                h_mapper[h_stack_index[h_stack_index.size()-1]] = temp_h_array;
+                                                temp_h_array = new Array();
                                             }
-                                            p_ul = temp;
                                         }
-                                    }
 
-                                    dfsing(-1);
+                                        for (let k of Object.keys(h_mapper)) {
+                                            h_mapper[k] = h_mapper[k].reverse();
+                                        }
+
+                                        let p_ul = document.createElement('div');
+                                        p_ul.id = 'article_index_container_inside';
+                                        article_index_container.appendChild(p_ul);
+
+                                        let dfsing = (node, depth) => {
+                                            let index_maker = 1;
+                                            for (let i of h_mapper[node]) {
+                                                let new_ul = document.createElement('ul');
+                                                let new_li = document.createElement('li');
+                                                let new_a = document.createElement('a');
+                                                new_a.href = '#' + i;
+                                                new_a.textContent = "(" + depth + ")" + index_maker + ". " + article_all_tag[i].textContent;
+                                                
+                                                if (depth == 1) {
+                                                    article_all_tag[i].textContent = index_maker + ". " + article_all_tag[i].textContent;
+                                                } else if (depth == 2) {
+                                                    article_all_tag[i].textContent = index_maker + ") " + article_all_tag[i].textContent;
+                                                } else {
+                                                    article_all_tag[i].textContent = "[" + index_maker + "] " + article_all_tag[i].textContent;
+                                                }
+
+                                                new_a.textContent = article_all_tag[i].textContent;
+                                                
+                                                index_maker++;
+                                                new_li.appendChild(new_a);
+                                                new_ul.appendChild(new_li);
+                                                p_ul.appendChild(new_ul);
+                                                let temp = p_ul;
+                                                p_ul = new_ul;
+                                                if (h_mapper[i]) {
+                                                    dfsing(i, depth + 1);
+                                                }
+                                                p_ul = temp;
+                                            }
+                                        }
+
+                                        dfsing(-1, 1);
+                                    } else {
+                                        article_index_container.style.display = 'none'
+                                    }
+                        
 
                                 </script>
 
                                 <s_tag_label>
-                                    <div class="tagTrail">
-                                        <span class="tagText">TAG </span> [##_tag_label_rep_##]
+                                    <div class="tagTrail" style="display: flex; align-items: center;">
+                                        <span class="tagText" style="background: black; color:white; font-weight: 900; border-radius: 100px; padding: 4px 8px; font-size: 5px; margin-right: 10px;">TAG</span>
+                                        <span style="font-size: 13px;">[##_tag_label_rep_##]</span>
                                     </div>
                                 </s_tag_label>
                             </article>
                             <footer>
+                                <div id="pre_next_article_container" style="display: flex; flex-wrap: wrap; justify-content: space-between; margin: 40px auto;">
+                                    <a href=[##_article_prev_link_##] class="page_move_button">
+                                        << 이전 글
+                                    </a>
+                                    <a href=[##_article_next_link_##] class="page_move_button">
+                                        다음 글 >>
+                                    </a>
+                                </div>
+                                <!--
                                 <s_article_related>
-                                    <s_article_related_rep>
-                                        <div>관련:[##_article_related_rep_title_##]</div> 
-                                    </s_article_related_rep>
+                                    <div id="related_article_container">
+                                        <span>카테고리의 다른 글</span>
+                                        <s_article_related_rep>
+                                            <a href=[##_article_related_rep_link_##]>
+                                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                                                    <div>[##_article_related_rep_title_##]</div>
+                                                    <div>[##_article_related_rep_date_##]</div>
+                                                </div>
+                                            </a>
+                                        </s_article_related_rep>
+                                    </div>
                                 </s_article_related>
-                                <!--레이지로드 검색-->
-                                <div style="background-image: url([##_image_##]); background-size: cover; background-repeat: no-repeat; background-position: center; width:50px; height: 50px; border-radius: 25px;"></div>
-                                <div>작성자:[##_blogger_##]</div>
-                                <div>작성자설명:[##_desc_##]</div>
+                                -->
                             </footer>
-                            <s_rp>
-                                [##_comment_group_##]
-                            </s_rp>
+                            <div id="comment_container">
+                                <s_rp>
+                                    [##_comment_group_##]
+                                </s_rp>
+                            </div>
                         </s_permalink_article_rep>
 
                         <s_article_protected>
@@ -202,34 +250,72 @@
 
                     <!-- 검색 결과 페이지 /search -->
                     <s_list>
-                        <div class="searchList [##_list_style_##]">
-                            <div <s_list_image>style="background-image:url('[##_list_image_##]')"</s_list_image>>
-                            <h3>'[##_list_conform_##]'에 해당되는 글 [##_list_count_##]건</h3>
-                            <p>[##_list_description_##]!!!!@@@</p>
+                        <div class="searchList">
+                            <div style="width: 100%; padding-top: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)));">
+                                <div style="font-weight: 900; font-size: 20px; display: flex; align-items: center; justify-content: center;">
+                                    <div>
+                                        [##_list_conform_##]
+                                    </div>
+                                    <div>
+                                        ([##_list_count_##])
+                                    </div>
+                                </div>
                             </div>
-                            <ol>
-                            <s_list_rep>
-                                <li>
-                                <span class="date">[##_list_rep_regdate_##]</span>
-                                <a href="[##_list_rep_link_##]">[##_list_rep_title_##]</a>
-                                <span class="cnt">[##_list_rep_rp_cnt_##]</span>
-                                <s_list_rep_thumbnail>
-                                    <img src="[##_list_rep_thumbnail_##]">
-                                </s_list_rep_thumbnail>
-                                </li>
-                            </s_list_rep>
-                            </ol>
+                            <div id='title_article_divide_box' style="margin: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top))); auto;">
+                                <hr style="height: 5px; width: 100%; margin-bottom: 10px;">
+                                <hr style="height: 3px; width: 80%;">
+                            </div>
+                            <ul style="list-style:none; padding-left: 0;">
+                                <s_list_rep>
+                                    <li>
+                                        <div class="category_article_container" style="margin: 40px auto; border: 2px solid; padding: 20px; border-radius: 10px;">
+                                            <div style="display: flex; align-items: center;">
+                                                <a href=[##_list_rep_link_##] style="background: black; font-weight: 900; font-size: 12px; color: white; padding: 4px 8px; border-radius: 100px; margin-right: 10px;">
+                                                    [##_article_rep_category_##]
+                                                </a>
+                                                <div style="font-size: 14px;">
+                                                    [##_list_rep_regdate_##]
+                                                </div>
+                                            </div>
+                                            <div style="margin: 10px 0;">
+                                                <a class="category_article_link" href="[##_list_rep_link_##]"><h4 style="line-height: 1.3">[##_list_rep_title_##]</h4></a>
+                                            </div>
+                                            <div class="article_summery">
+                                                [##_article_rep_summary_##]
+                                            </div>
+                                            <div style="text-align: right; margin-top: 20px;">
+                                                <i class="fa-solid fa-comment"></i>
+                                                <span class="article_comment_count">[##_list_rep_rp_cnt_##]</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </s_list_rep>
+                                <script>
+                                    let temp_article_link = document.querySelectorAll(".category_article_link");
+                                    for (let al of temp_article_link) {
+                                        let new_article_image = al.querySelector("img");
+                                        if (!new_article_image) continue;
+                                        console.log(new_article_image);
+                                        new_article_image.style.padding = "0";
+                                        new_article_image.style.margin = "0 0 0 5px";
+                                    }
+                                    let temp_article_comment = document.querySelectorAll(".article_comment_count");
+                                    for (let ac of temp_article_comment) {
+                                        ac.textContent = ac.textContent.slice(1, -1);
+                                    }
+                                </script>
+                            </ul>
                         </div>
                     </s_list>
                     <s_paging>
                         <div class="paging">
-                            <a [##_prev_page_##] class="[##_no_more_prev_##]">◀ PREV </a>
+                            <a [##_prev_page_##] class="[##_no_more_prev_##]">◀ 이전 </a>
                             <span class="numbox">
                             <s_paging_rep>
                                 <a [##_paging_rep_link_##] class="num">[[##_paging_rep_link_num_##]]</a>
                             </s_paging_rep>
                             </span>
-                            <a [##_next_page_##] class="[##_no_more_next_##]">NEXT ▶</a>
+                            <a [##_next_page_##] class="[##_no_more_next_##]">다음 ▶</a>
                         </div>
                     </s_paging>
                 </div>
