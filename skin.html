@@ -15,20 +15,125 @@
     
 </head>
 
-<body id="[##_body_id_##]" onscroll="getScrollPosition(this.scrollY);">
+<body id="[##_body_id_##]" onscroll="getScrollPosition(this.scrollY, '[##_body_id_##]');" onload="startScrollPosition(this.scrollY, '[##_body_id_##]');">
     <s_t3>
         <div id="container">
             <main id="main">
                 <s_cover_group>
-                    <s_cover_rep>
-                        <s_cover name="front_door">
-                            <s_cover_item>
-                                <s_cover_item_article_info>[##_cover_item_title_##]</s_cover_item_article_info>
-                                <s_cover_item_not_article_info>[##_cover_item_summary_##]</s_cover_item_not_article_info>
-                            </s_cover_item>
-                        </s_cover>
-                    </s_cover_rep>
+                    <div id="welcome_div" style="position: fixed; width: inherit; z-index:-1;">
+                        <div style="width: 200px;">
+                            <div style="text-align: left; font-size: 45px; font-weight: 900;">
+                                okane
+                            </div>
+                            <div style="text-align: right; font-size: 20px; font-weight: 900;">
+                                on cliff-edge
+                            </div>
+                            <div style="width: 50px; height: 50px; border-radius: 25px; border: 2px solid; margin: 40px auto 0; display: flex; justify-content: center; align-items: center;">
+                                <i id="main_page_down_arrow" class="fa-solid fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-top: calc(var(--vh, 1vh) * 110)">
+                        <div style="text-align: center; margin-bottom: 20px; font-size: 16px; font-weight: 900;">방문자 수</div>
+                        <div style="width: 280px; margin: 0 auto; display: flex; justify-content: space-between; text-align:center; margin-bottom: 50px;">
+                            <div class="count_box">
+                                <div><i class="fa-solid fa-users"></i></div>
+                                <div class="count_text">[##_count_total_##]<span style="font-size: 13px">명</span></div>
+                                <div style="font-size: 13px;">전체</div>
+                            </div>
+                            <div class="count_box">
+                                <div><i class="fa-solid fa-user"></i></div>
+                                <div class="count_text">[##_count_today_##]<span style="font-size: 13px">명</span></div>
+                                <div style="font-size: 13px;">오늘</div>
+                            </div>
+                            <div class="count_box">
+                                <div><i class="fa-solid fa-copy"></i></div>
+                                <div class="count_text">[##_count_yesterday_##]<span style="font-size: 13px">명</span></div>
+                                <div style="font-size: 13px;">어제</div>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="main_inside_padding" style="max-width: 500px;">
+                            <s_cover_rep>
+                                <s_cover name="front_door">
+                                    <div style="margin: 60px 0;">
+                                        <div style="text-align: center; font-size: 16px; font-weight: 900;">
+                                            [##_cover_title_##]
+                                        </div>
+                                        <ul style="padding-left: 0; list-style: none;">
+                                            <s_cover_item>
+                                                <a href=[##_cover_item_url_##]>
+                                                    <li class="cover_li">
+                                                        <div>[##_cover_item_date_##]</div>
+                                                        <div style="color: black;">[##_cover_item_title_##]</div>
+                                                    </li>
+                                                </a>
+                                            </s_cover_item>
+                                        </ul>
+                                    </div>
+                                </s_cover>
+                            </s_cover_rep>
+                        </div>
+                        -->
+                    </div>
+                    <style>
+                        .count_box {
+                            width: 30%;
+                            background-color: rgb(236, 242, 249);
+                            padding: 20px 0;
+                            border-radius: 10px;
+                        }
+                        .count_text {
+                            font-size: 15px;
+                            font-weight: 900;
+                            margin: 10px 0;
+                        }
+                        .cover_li {
+                            width: 100%; margin: 10px 0; text-align: center; border: 2px rgb(140, 171, 222) solid;
+                            padding: 20px;
+                        }
+                    </style>
+                    <!--
+                    <div class="recentComment">
+                        <div class="main_inside_padding" style="max-width: 500px;">
+                            <div style="text-align: center; font-size: 16px; font-weight: 900;">
+                                최근 댓글
+                            </div>
+                            <ul id="recentComments" style="padding-left: 0; list-style: none;">
+                                <s_rctrp_rep>
+                                    <li class="cover_li">
+                                        <a href="[##_rctrp_rep_link_##]" style="color: black;">[##_rctrp_rep_desc_##].</a>
+                                        <span class="info_wrap">
+                                            <span class="name">[##_rctrp_rep_name_##]</span>
+                                            <span class="date">[##_rctrp_rep_time_##]</span>
+                                        </span>
+                                    </li>
+                                </s_rctrp_rep>
+                            </ul>
+                        </div>
+                    </div>
+                    -->
                 </s_cover_group>
+
+                <s_guest>
+                    <div class="main_inside_padding">
+                        <div style="width: 100%; padding-top: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top))); margin: 0 auto;">
+                            <div>
+                                <div style="text-align: center; font-weight: 900; font-size: 20px;">
+                                    방명록
+                                </div>
+                                <div style="font-size: 12px; text-align: center; margin-top: 10px;">
+                                    방문해 주셔서 고마워요. 자유롭게 댓글을 달아주세요.
+                                </div>
+                            </div>
+                        </div>
+                        <div id='title_article_divide_box' style="margin: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top))) auto;">
+                            <hr style="height: 5px; width: 100%; margin-bottom: 10px;">
+                            <hr style="height: 3px; width: 80%;">
+                        </div>
+                        [##_guestbook_group_##]
+                    </div>
+                </s_guest>
 
                 <div class="main_inside_padding">
                     <s_article_rep>
@@ -160,13 +265,17 @@
                                 </s_tag_label>
                             </article>
                             <footer>
-                                <div id="pre_next_article_container" style="display: flex; flex-wrap: wrap; justify-content: space-between; margin: 40px auto;">
-                                    <a href=[##_article_prev_link_##] class="page_move_button">
-                                        << 이전 글
-                                    </a>
-                                    <a href=[##_article_next_link_##] class="page_move_button">
-                                        다음 글 >>
-                                    </a>
+                                <div id="pre_next_article_container" style="height: 50px; margin: 40px auto;">
+                                    <s_article_prev>
+                                        <a href=[##_article_prev_link_##] class="page_move_button" style="float: left;">
+                                            << 이전 글
+                                        </a>
+                                    </s_article_prev>
+                                    <s_article_next>
+                                        <a href=[##_article_next_link_##] class="page_move_button" style="float: right;">
+                                            다음 글 >>
+                                        </a>
+                                    </s_article_next>
                                 </div>
                                 <!--
                                 <s_article_related>
@@ -261,33 +370,35 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id='title_article_divide_box' style="margin: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top))); auto;">
+                            <div id='title_article_divide_box' style="margin: calc(1.5*(var(--hamburger-button-size) + 2 * var(--logo-margin-top))) auto;">
                                 <hr style="height: 5px; width: 100%; margin-bottom: 10px;">
                                 <hr style="height: 3px; width: 80%;">
                             </div>
                             <ul style="list-style:none; padding-left: 0;">
                                 <s_list_rep>
                                     <li>
-                                        <div class="category_article_container" style="margin: 40px auto; border: 2px solid; padding: 20px; border-radius: 10px;">
-                                            <div style="display: flex; align-items: center;">
-                                                <a href=[##_list_rep_link_##] style="background: black; font-weight: 900; font-size: 12px; color: white; padding: 4px 8px; border-radius: 100px; margin-right: 10px;">
-                                                    [##_article_rep_category_##]
-                                                </a>
-                                                <div style="font-size: 14px;">
-                                                    [##_list_rep_regdate_##]
+                                        <a href=[##_list_rep_link_##]>
+                                            <div class="category_article_container" style="margin: 40px auto; border: 2px rgb(0,0,0,0.1) solid; padding: 20px; border-radius: 10px;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div style="background: black; font-weight: 900; font-size: 12px; color: white; padding: 4px 8px; border-radius: 100px; margin-right: 10px;">
+                                                        [##_article_rep_category_##]
+                                                    </div>
+                                                    <div style="font-size: 14px; color: rgb(0,0,0,0.8)">
+                                                        [##_list_rep_regdate_##]
+                                                    </div>
+                                                </div>
+                                                <div style="margin: 10px 0; color: rgb(0,0,0);">
+                                                    <span class="category_article_link"><h4 style="line-height: 1.3">[##_list_rep_title_##]</h4></span>
+                                                </div>
+                                                <div class="article_summery" style="color: rgb(0,0,0, 0.6);">
+                                                    [##_article_rep_summary_##]
+                                                </div>
+                                                <div style="text-align: right; margin-top: 20px; color: rgb(0,0,0,0.6);">
+                                                    <i class="fa-solid fa-comment"></i>
+                                                    <span class="article_comment_count">[##_list_rep_rp_cnt_##]</span>
                                                 </div>
                                             </div>
-                                            <div style="margin: 10px 0;">
-                                                <a class="category_article_link" href="[##_list_rep_link_##]"><h4 style="line-height: 1.3">[##_list_rep_title_##]</h4></a>
-                                            </div>
-                                            <div class="article_summery">
-                                                [##_article_rep_summary_##]
-                                            </div>
-                                            <div style="text-align: right; margin-top: 20px;">
-                                                <i class="fa-solid fa-comment"></i>
-                                                <span class="article_comment_count">[##_list_rep_rp_cnt_##]</span>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </li>
                                 </s_list_rep>
                                 <script>
@@ -301,24 +412,37 @@
                                     }
                                     let temp_article_comment = document.querySelectorAll(".article_comment_count");
                                     for (let ac of temp_article_comment) {
-                                        ac.textContent = ac.textContent.slice(1, -1);
+                                        if (ac.textContent == '') {
+                                            ac.textContent = '0';
+                                        } else {
+                                            ac.textContent = ac.textContent.slice(1, -1);
+                                        }
                                     }
                                 </script>
                             </ul>
                         </div>
                     </s_list>
-                    <s_paging>
-                        <div class="paging">
-                            <a [##_prev_page_##] class="[##_no_more_prev_##]">◀ 이전 </a>
-                            <span class="numbox">
-                            <s_paging_rep>
-                                <a [##_paging_rep_link_##] class="num">[[##_paging_rep_link_num_##]]</a>
-                            </s_paging_rep>
-                            </span>
-                            <a [##_next_page_##] class="[##_no_more_next_##]">다음 ▶</a>
-                        </div>
-                    </s_paging>
                 </div>
+                
+                <s_paging>
+                    <div class="paging" style="text-align: center; margin-bottom: 50px;">
+                        <span class="numbox">
+                            <a [##_prev_page_##] class="[##_no_more_prev_##]" style="margin-right: 10px;"><span><</span></a>
+                            <s_paging_rep>
+                                <a [##_paging_rep_link_##] class="num">[##_paging_rep_link_num_##]</a>
+                            </s_paging_rep>
+                            <script>
+                                for (let list_num of document.querySelectorAll(".numbox .num > span")) {
+                                    if (list_num.classList.contains('selected')) {
+                                        list_num.parentElement.removeAttribute("href");
+                                        break;
+                                    }
+                                }
+                            </script>
+                            <a [##_next_page_##] class="[##_no_more_next_##]" style="margin-left: 10px;"><span>></span></a>
+                        </span>
+                    </div>
+                </s_paging>
 
                 <header_bar id="header_bar">
                     <div id="page_title_container" style="margin: 0 auto;">
@@ -336,10 +460,17 @@
                     </div>
                 </header_bar>
                 <script>
-                    var getScrollPosition = (e) => {
-                        if (e == 0) header_bar.style.top = 'calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)))';
+                    var getScrollPosition = (e, body_id) => {
+                        if (body_id == 'tt-body-index') {
+                            if (e > 500) return;
+                            welcome_div.style.filter = "blur(" + e / 10 + "px)"
+                            welcome_div.style.opacity = 1 - e / 500;
+                        }
                         else {
-                            header_bar.style.top = 0;
+                            if (e == 0) header_bar.style.top = 'calc(-1*(var(--hamburger-button-size) + 2 * var(--logo-margin-top)))';
+                            else {
+                                header_bar.style.top = 0;
+                            }
                         }
                     }
                     if (document.body.id == 'tt-body-page') {
@@ -352,63 +483,71 @@
             <aside class="nav_bar">
                 <div id="nav_bar_inside_region">
                     <div id="nav_bar_inside">
-                        <s_sidebar>
-                            <!--
-                            <s_sidebar_element>--><!-- 방문자 수--><!--
-                            전체:[##_count_total_##]
-                            오늘:[##_count_today_##]
-                            어제:[##_count_yesterday_##]
+                        <s_sidebar>                            
+                            <s_sidebar_element><!--블로그메뉴-->
+                                <div id="blog_menu" style="width: 80%; margin:0 auto;">
+                                    <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 50px; border-radius: 25px; background: white; margin: 0 auto; box-shadow: 0 5px 5px 0px rgba(0,0,0,0.2);">
+                                        <a href="/">
+                                            <div class="blog_menu_button_container">
+                                                <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-home-multimedia-kiranshastry-gradient-kiranshastry.png" alt="external-home-multimedia-kiranshastry-gradient-kiranshastry"/>
+                                                <div>홈</div>
+                                            </div>
+                                        </a>
+                                        <a href="/guestbook">
+                                            <div class="blog_menu_button_container">
+                                                <img src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-note-documents-icongeek26-outline-gradient-icongeek26.png" alt="external-note-documents-icongeek26-outline-gradient-icongeek26"/>
+                                                <div>방명록</div>
+                                            </div>
+                                        </a>
+                                        <div class="blog_menu_button_container" onclick="open_search_container()">
+                                            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-search-logistic-delivery-kiranshastry-gradient-kiranshastry.png" alt="external-search-logistic-delivery-kiranshastry-gradient-kiranshastry"/>
+                                            <div>검색</div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 100%;" id='search_box_container' class="search_container height_zero">
+                                        <div id='search_container_inside'>
+                                            <s_search>
+                                                <!--<div style="margin-top:20px;"></div>-->
+                                                <div style="width: 90%; margin: 20px auto 0; height: 40px; background: white; border-radius: 10px; display: flex; justify-content: center; align-items: center;">
+                                                    <input type='text'/ style="width: 70%; border: none; outline: none; font-size: 15px;" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }" autocomplete="off"><button style="width: 40px; height: 40px; background: none; border: none;" onclick="[##_search_onclick_submit_##]"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                </div>
+                                            </s_search>
+                                            <div style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 15px; width: 100%;">
+                                                <s_tag_rep>
+                                                    <li class="text-sm" style="display: inline-block;"><a class="[##_tag_class_##]" href="[##_tag_link_##]" style="color: black; margin: 0 5px; background: rgb(0,0,0,0.4); line-height: 35px; color: white; padding: 5px; 15px; border-radius: 12px;">[##_tag_name_##]</a></li>
+                                                </s_tag_rep>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        let open_search_container = () => {
+                                            if (search_box_container.classList.contains('height_zero')) {
+                                                search_box_container.classList.remove('height_zero');
+                                            } else {
+                                                search_box_container.classList.add('height_zero');
+                                            }
+                                        }
+                                    </script>
+                                </div>
                             </s_sidebar_element>
-                            -->
-                            <!-- 프로필에서 블로그 메뉴 분리 후 여기다 놓고 프로필에는 설명이나 링크 같은거 달아두자자 -->
+                            
                             <s_sidebar_element><!--프로필-->
-                                <div id="profile_container">
+                                <div id="profile_container" style="margin-top: 40px;">
                                     <div class="nav_content">
                                         <div style="background-image: url([##_image_##]); background-size: cover; background-repeat: no-repeat; background-position: center; height: calc(var(--nav-width) / 10 * 7); width: calc(var(--nav-width) / 10 * 7); margin: 0 auto; border: white 10px solid; box-shadow: 0 10px 10px 0px rgba(0,0,0,0.2);"></div>
-                                        <!--<div id="admin_container">
-                                          <a href="https://okane-on-cliff.tistory.com/manage/post"><i class="fa-solid fa-square-pen"></i>글쓰기</a>
-                                        </div>
-                                        <script>
-                                            if (window.T.config.ROLE == 'owner') admin_container.style.display = 'block';
-                                        </script>-->
-
-                                        <div id="blog_menu" style="margin-top: 40px;">
-                                            <!--
-                                            <div>
-                                                안녕하세요요
-                                            </div>
-                                            -->
-                                            <div style="display: flex; justify-content: space-evenly; align-items: center; width: 100%; height: 50px; border-radius: 25px; background: white; margin: 0 auto; box-shadow: 0 5px 5px 0px rgba(0,0,0,0.2);">
-                                                <!--<img width="30" height="30" src="./images/github_icon.svg">-->
-                                                <div class="blog_menu_button_container">
-                                                    <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-home-multimedia-kiranshastry-gradient-kiranshastry.png" alt="external-home-multimedia-kiranshastry-gradient-kiranshastry"/>
-                                                    <div>공지</div>
-                                                </div>
-                                                <div class="blog_menu_button_container">
-                                                    <img src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/external-note-documents-icongeek26-outline-gradient-icongeek26.png" alt="external-note-documents-icongeek26-outline-gradient-icongeek26"/>
-                                                    <div>방명록</div>
-                                                </div>
-                                                <div class="blog_menu_button_container">
-                                                    <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/external-search-logistic-delivery-kiranshastry-gradient-kiranshastry.png" alt="external-search-logistic-delivery-kiranshastry-gradient-kiranshastry"/>
-                                                    <div>검색</div>
-                                                </div>
+                                        <div style="margin-top: 20px;">
+                                            <div style="font-weight: 900; margin-bottom: 5px; text-align: center;">[##_blogger_##]</div>
+                                            <div style="color: rgb(0,0,0,0.8); text-align: center;">[##_desc_##]</div>
+                                            <div style="margin-top: 15px; display: flex; justify-content: center; align-items: center;">
+                                                <a href='https://github.com/okanekudasai' target="_blank">
+                                                    <img height=30 src="https://tistory3.daumcdn.net/tistory/5699604/skin/images/github_icon.svg">
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="hr_div"></div>
+                                <div class="hr_div" style="width: 80%;"></div>
                             </s_sidebar_element>
-
-                            <!--
-                            <s_sidebar_element>--><!--검색--><!--
-                                <div id="search_container">
-                                    <div class="nav_content">
-                                        <s_search>
-                                            <div><input id="search" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }"><button>검색</button></div>
-                                        </s_search>
-                                    </div>
-                                </div>
-                            </s_sidebar_element>-->
                             
                             <s_sidebar_element><!--카테고리-->
                                 <div id="category_container">
@@ -416,7 +555,7 @@
                                         [##_category_list_##]
                                         <script>
                                             var category_title = document.querySelector("#category_container .link_tit");
-                                                category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "카테고리");
+                                                category_title.innerHTML = category_title.innerHTML.replace("분류 전체보기", "전체 글");
 
                                             for (let el of document.querySelector('#category_container .category_list').children) {
                                                 if (el.innerText[0] == '*') {
@@ -424,7 +563,6 @@
                                                     let index = ih.indexOf('*');
                                                     index = ih.indexOf('*', index+1);
                                                     el.innerHTML = ih.substring(0, index) + ih.substring(index + 1);
-                                                    // console.log(el.innerHTML);
                                                     const ulElement = document.createElement('ul');
                                                     ulElement.classList.add('middle_category_list');
                                                     let article_count = 0;
@@ -447,6 +585,7 @@
                                                     el.removeAttribute("href");
 
                                                     let arrow_box = document.createElement('span');
+                                                    arrow_box.classList.add('see_right');
                                                     arrow_box.innerHTML = '<i class=\"fas fa-angle-right\"></i>'
                                                     el.appendChild(arrow_box);
 
@@ -459,18 +598,77 @@
                                                     el.onclick = () => {
                                                         if (ul_box.classList.contains('height_zero')) {
                                                             ul_box.classList.remove('height_zero');
+                                                            arrow_box.classList.remove('see_right');
+                                                            arrow_box.classList.add('see_down');
                                                         } else {
                                                             ul_box.classList.add('height_zero');
+                                                            arrow_box.classList.remove('see_down');
+                                                            arrow_box.classList.add('see_right');
                                                         }
                                                     }
                                                 }
                                             }
+                                            let big_cat = "";
+                                            let small_cat = "";
+                                            if (location.pathname.split("/")[1] == 'category') {
+                                                big_cat = decodeURIComponent(location.pathname.split("/")[2]);
+                                                small_cat = decodeURIComponent(location.pathname.split("/")[3]);
+                                            } else {
+                                                big_cat = page_title_category.textContent.split("/")[0];
+                                                small_cat = page_title_category.textContent.split("/")[1];
+                                            }
+                                            for (let el of document.querySelectorAll('.tt_category > li > ul a')) {
+                                                let all_href_array = decodeURIComponent(el.href).split('/');
+                                                let href_category_index = all_href_array.indexOf("category");
+                                                if(big_cat == all_href_array[href_category_index + 1] && (small_cat == all_href_array[href_category_index + 2] || (small_cat=='undefined' && all_href_array[href_category_index + 2]==undefined))) {
+                                                    let current_el = el;
+                                                    current_el.style.fontWeight = '900';
+                                                    while (true) {
+                                                        current_el = current_el.parentElement;
+                                                        if (current_el.classList.contains('tt_category')) break;
+                                                        if (current_el.classList.contains('ul_box')) {
+                                                            current_el.previousElementSibling.style.fontWeight = '900';
+                                                            current_el.previousElementSibling.click();
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
                                         </script>
                                     </div>
                                 </div>
                             </s_sidebar_element>
+                            <s_sidebar_element><!--로그인버튼-->
+                                <div style='margin-top: 80px; text-align: center; font-size: small; color: rgb(0,0,0,0.4)'>
+                                    <div id="not_logined_state" class="login_button">
+                                        <a id='login_anchor'>로그인</a>
+                                    </div>
+                                    <div id="logined_state" class="login_button">
+                                        <a id='logout_anchor'>로그아웃</a>
+                                        <span id='write_box'>
+                                            <span style="margin: 0 10px">|</span>
+                                            <a href='https://okane-on-cliff.tistory.com/manage/post'>글쓰기</a>
+                                            <span style="margin: 0 10px">|</span>
+                                            <a href='https://okane-on-cliff.tistory.com/manage'>관리</a>
+                                        </span>
+                                    </div>
+                                    <script>
+                                        if (window.T.config['IS_LOGIN']) {
+                                            logined_state.style.display = 'block';
+                                            if (window.T.config.ROLE == 'owner') {
+                                                write_box.display = 'inline';
+                                            }
+                                        } else {
+                                            not_logined_state.style.display = 'block';
+                                        }
+                                        login_anchor.href = "https://www.tistory.com/auth/login?redirectUrl=" + encodeURIComponent(window.location.href);
+                                        logout_anchor.href = "https://www.tistory.com/auth/logout?redirectUrl=" + encodeURIComponent(window.location.href);
+                                    </script>
+                                </div>
+                            </s_sidebar_element>
                         </s_sidebar>
                     </div>
+                    
                 </div>
             </aside>
         </div>
@@ -483,13 +681,19 @@
                 </div>
             </div>
             <div id="logo" onClick="location.href ='https://okane-on-cliff.tistory.com/'">
-                <div id="logo_main">
-                    블로그
+                <div id="logo_main" style="display: flex; align-items:center;">
+                    <div style="font-size: 30px; margin-right: 4px;">{</div>
+                    <div>
+                        <div style="font-size: calc(var(--hamburger-button-size) * 0.35); text-align:center; letter-spacing: 5px;">
+                            벼랑끝의
+                        </div>
+                        <div style="font-size: calc(var(--hamburger-button-size) * 0.65); text-align:center; letter-spacing: 5px;">
+                            오케인
+                        </div>
+                    </div>
+                    <div style="font-size: 30px; margin-left: 2px;">}</div>
                 </div>
             </div>
-        </div>
-        <div id="search_icon_container">
-            <img src="./images/search_icon.svg" style="height: calc(var(--hamburger-button-size) * 0.6);">
         </div>
         <script>
             var nav_bar = document.querySelector('.nav_bar');
@@ -580,12 +784,6 @@
                 difense_div.onclick = () => {
                     hamburger_button_click();
                 }
-                /*
-                main.style.filter = 'blur(5px)'
-                main.onclick = () => {
-                    hamburger_button_click();
-                }
-                */
             } else {
                 main.style.width = 'calc(100% - var(--nav-width))';
                 main.style.left = 'var(--nav-width)';
@@ -602,6 +800,19 @@
             set_page_title_width_short();
         }
         setTimeout(set_page_title_scroll, '100');
+    }
+
+    nav_bar.style.opacity = '1';
+
+    var startScrollPosition = (e, body_id) => {
+        if (body_id == 'tt-body-index') {
+            if (e > 500) {
+                welcome_div.style.opacity = 0;
+            } else {
+                welcome_div.style.filter = "blur(" + e / 10 + "px)"
+                welcome_div.style.opacity = 1 - e / 500;
+            }
+        }
     }
 </script>
 
