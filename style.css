@@ -5,8 +5,12 @@
     font-style: normal;
 }
 
-@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-
+@font-face {
+    font-family: 'GapyeongWave';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/GapyeongWave.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
 #DragSchLayer {
     display: none !important;
@@ -30,13 +34,13 @@ html {
 }
 
 a {
+    color: black;
     text-decoration: none;
 }
 
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Nanum Gothic';
     -webkit-tap-highlight-color : rgba(0,0,0,0);
 }
 
@@ -171,9 +175,6 @@ a {
 }
 
 
-.tt_category a:hover {
-}
-
 .tt_category > li > a {
     position: relative;
     left: 50%;
@@ -240,6 +241,11 @@ a {
     transform: rotate( 90deg );
 }
 
+.see_right, .see_down {
+    float: right;
+    margin-right: 14px;
+}
+
 .login_button, .write_box {
     display: none;
 }
@@ -286,6 +292,7 @@ a {
     display: flex;
     align-items: center;
     transition: background-color 0.1s;
+    background-color: rgba(255, 255, 255, 0.189);
 }
 
 @media (hover: hover) {
@@ -294,6 +301,12 @@ a {
     }
     #search_icon_container:hover {
         background-color: rgb(0,0,0,0.1);
+    }
+
+    .cover_article_item:hover {
+        cursor:pointer;
+        transform: scale(1.05);
+        box-shadow: 0 25px 10px 10px rgba(0,0,0,0.1);
     }
 }
 
@@ -797,4 +810,40 @@ button.tt_btn_prev_more:hover {
     border-radius: 15px;
     border: 1px solid;
     color: rgb(0, 0, 0, 0.8);
+}
+
+#cover_container {
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: dashed;
+}
+
+#cover_container::-webkit-scrollbar {
+  display: none;
+}
+
+
+.cover_article_item {
+    border-radius: 20px;
+    padding: 20px 30px;
+    margin-top: 30px;
+    transition: all 0.2s;
+    box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back_white {
+    background-color: rgb(252, 252, 252);
+}
+
+@media (max-width: 700px) {
+	.reply_notice {
+		width: 95%;
+	}
+}
+@media (min-width: 701px) {
+    .reply_notice {
+		width: 45%;
+	}
 }
